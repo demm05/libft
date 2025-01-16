@@ -1,6 +1,6 @@
 NAME = printf.a
 
-HDIR = include 
+HDIR = include/private
 SDIR = srcs
 ODIR = objs
 
