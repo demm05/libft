@@ -12,6 +12,7 @@ LIBFT_DIR			=	$(LIB_DIR)/libft
 LIBFT_FILE			=	printf.a
 LIBFT				=	$(LIBFT_DIR)/$(LIBFT_FILE)
 CFLAGS				+=	-I$(LIBFT_DIR)/include
+LIB					+=	$(LIBFT)
 
 $(PRINTF):
 	$(MAKE_LIB) $(PRINF_DIR)
