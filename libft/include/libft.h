@@ -6,7 +6,7 @@
 /*   By: dmelnyk <dmelnyk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:13:27 by dmelnyk           #+#    #+#             */
-/*   Updated: 2025/01/16 19:32:30 by dmelnyk          ###   ########.fr       */
+/*   Updated: 2025/01/17 11:36:04 by dmelnyk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,23 @@ size_t	ft_strlen(const char *str);
  *         - Less than zero if `s1` is lexicographically less than `s2`.
  * */
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+
+/* *
+ * @brief Compares two strings
+ *
+ * This function compares characters of the strings 
+ * pointed to by `s1` and `s2`. The comparison is done lexicographically. 
+ * Characters following a null character are not considered.
+ *
+ * @param s1 A pointer to the first string.
+ * @param s2 A pointer to the second string.
+ *
+ * @return An integer indicating the relationship between the two strings:
+ *         - Zero if the strings are equal up to the first `n` characters.
+ *         - Greater than zero if `s1` is lexicographically greater than `s2`.
+ *         - Less than zero if `s1` is lexicographically less than `s2`.
+ * */
+int		ft_strcmp(const char *s1, const char *s2);
 
 /**
  * @brief Locates the first occurrence of a character in a string.
