@@ -6,7 +6,7 @@
 /*   By: dmelnyk <dmelnyk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 17:42:31 by dmelnyk           #+#    #+#             */
-/*   Updated: 2025/01/16 19:33:35 by dmelnyk          ###   ########.fr       */
+/*   Updated: 2025/01/17 12:45:26 by dmelnyk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	parse_format(const char *format, va_list val)
 	return (len);
 }
 
-int	__attribute__((visibility("default"))) ft_printf(const char *format, ...)
+int	__attribute__((visibility("default")))	ft_printf(const char *format, ...)
 {
 	va_list			args;
 	int				len;
