@@ -25,13 +25,9 @@ size_t	ft_strlen(const char *str)
 
 int	_pf_putstr(char *s, int fd)
 {
-	int	len;
-
 	if (!s)
 		return (0);
-	len = ft_strlen(s);
-	write(fd, s, len);
-	return (len);
+	return (write(fd, s, ft_strlen(s)));
 }
 
 char	*pf_string(va_list val, t_spec_info *s_info)

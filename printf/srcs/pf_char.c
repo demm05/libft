@@ -15,8 +15,7 @@
 
 int	_putchar(char c)
 {
-	write(1, &c, 1);
-	return (1);
+	return (write(1, &c, 1));
 }
 
 char	*pf_char(va_list val, t_spec_info *s_info)

@@ -47,7 +47,7 @@ void	ft_putnbr_fd(int num, int fd)
 	{
 		n = num;
 		n *= -1;
-		write(fd, "-", 1);
+		(void)!write(fd, "-", 1);
 	}
 	else
 		n = num;
@@ -57,7 +57,7 @@ void	ft_putnbr_fd(int num, int fd)
 		temp = ft_recursive_power(10, len - 1);
 		buffer[0] = n / temp + '0';
 		n = n % temp;
-		write(fd, buffer, 1);
+		(void)!write(fd, buffer, 1);
 		len--;
 	}
 }
