@@ -4,11 +4,14 @@ HDIR = include/private
 SDIR = srcs
 ODIR = objs
 
-SRCS := $(wildcard $(SDIR)/*.c)
-OBJS := $(patsubst $(SDIR)/%.c, $(ODIR)/%.o, $(SRCS))
+SRCS = ft_parsers.c ft_printf_utils.c parse_specifier.c pf_hex.c pf_pointer.c pf_unsigned.c \
+		ft_printf.c libft.c pf_char.c pf_integer.c pf_string.c
+OBJS := $(patsubst %.c, $(ODIR)/%.o, $(SRCS))
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I$(HDIR) -fvisibility=hidden
+
+VPATH = srcs
 
 DIRS = $(ODIR)
 
@@ -30,7 +33,7 @@ $(NAME): $(OBJS)
 	@ar rcs $@ $^ && echo "$(GREEN)printf created.$(RESET)"
 	@echo
 
-$(ODIR)/%.o: $(SDIR)/%.c | $(DIRS)
+$(ODIR)/%.o: %.c | $(DIRS)
 	@$(CC) $(CFLAGS) -c -o $@ $< && echo -n "$(BRIGHT_GREEN).$(RESET)"
 
 bonus : all
