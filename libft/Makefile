@@ -11,16 +11,26 @@ VPATH				=	$(SDIR):$(SDIR)/conversion:$(SDIR)/list:$(SDIR)/memory:$(SDIR)/output
 SRCS 				:=	$(wildcard $(SDIR)/*/*.c)
 OBJS				:=	$(patsubst $(SDIR)/%.c, $(ODIR)/%.o, $(SRCS))
 
+BRIGHT_GREEN = \033[92m
+GREEN = \033[32m
+RESET = \033[0m
+YELLOW = \033[33m
+
 all: $(NAME)
 
-$(DIRS):
+welcome:
+	@echo -n "$(YELLOW)Building libft: $(RESET)"
+
+$(DIRS): | welcome
 	@mkdir -p $@
 
 $(ODIR)/%.o: $(SDIR)/%.c | $(DIRS)
-	$(CC) $(CFLAGS) -c -o $@ $<
+	@$(CC) $(CFLAGS) -c -o $@ $< && echo -n "$(BRIGHT_GREEN).$(RESET)"
 
 $(NAME): $(OBJS)
-	ar rcs $@ $^
+	@echo
+	@ar rcs $@ $^ && echo "$(GREEN)libft created.$(RESET)"
+	@echo
 
 clean:
 	@rm -rf $(ODIR)

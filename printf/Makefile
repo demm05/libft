@@ -10,14 +10,28 @@ OBJS := $(patsubst $(SDIR)/%.c, $(ODIR)/%.o, $(SRCS))
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I$(HDIR) -fvisibility=hidden
 
+DIRS = $(ODIR)
+
+BRIGHT_GREEN = \033[92m
+GREEN = \033[32m
+RESET = \033[0m
+YELLOW = \033[33m
+
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	ar rcs $@ $^
+welcome:
+	@echo -n "$(YELLOW)Building printf: $(RESET)"
 
-$(ODIR)/%.o: $(SDIR)/%.c
-	@mkdir -p $(ODIR)
-	$(CC) $(CFLAGS) -c -o $@ $<
+$(DIRS): |welcome
+	@mkdir -p $@
+
+$(NAME): $(OBJS)
+	@echo
+	@ar rcs $@ $^ && echo "$(GREEN)printf created.$(RESET)"
+	@echo
+
+$(ODIR)/%.o: $(SDIR)/%.c | $(DIRS)
+	@$(CC) $(CFLAGS) -c -o $@ $< && echo -n "$(BRIGHT_GREEN).$(RESET)"
 
 bonus : all
 
