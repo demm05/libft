@@ -6,7 +6,7 @@
 /*   By: dmelnyk <dmelnyk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:13:27 by dmelnyk           #+#    #+#             */
-/*   Updated: 2025/01/17 11:36:04 by dmelnyk          ###   ########.fr       */
+/*   Updated: 2025/01/28 19:33:52 by dmelnyk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -321,6 +321,18 @@ char	**ft_split(char const *s, char c);
  *			or NULL if insufficient memory was available.
  * */
 char	*ft_strdup(const char *src);
+
+/**
+ * @brief Converts a string to an double.
+ *
+ * This function converts the initial portion of the string 
+ * pointed to by `str` to an `double` representation.
+ *
+ * @param str The string to convert.
+ *
+ * @return The converted double value.
+ * */
+double	ft_atod(const char *s);
 
 /**
  * @brief Converts a string to an integer.
