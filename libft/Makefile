@@ -20,10 +20,10 @@ SRCS				:=	atoi.c itoa.c tolower.c toupper.c \
 
 OBJS := $(patsubst %.c,$(ODIR)/%.o,$(SRCS))
 
-BRIGHT_GREEN = \033[92m
-GREEN = \033[32m
-RESET = \033[0m
-YELLOW = \033[33m
+BRIGHT_GREEN = $(shell echo -e "\033[92m")
+GREEN = $(shell echo -e "\033[32m")
+RESET = $(shell echo -e "\033[0m")
+YELLOW = $(shell echo -e "\033[33m")
 
 all: $(NAME)
 

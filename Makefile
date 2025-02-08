@@ -15,7 +15,7 @@ CFLAGS				+=	-I$(LIBFT_DIR)/include
 LIB					+=	$(LIBFT)
 
 $(PRINTF):
-	$(MAKE_LIB) $(PRINF_DIR)
+	$(MAKE_LIB) $(PRINTF_DIR)
 
 $(LIBFT):
 	$(MAKE_LIB) $(LIBFT_DIR)
