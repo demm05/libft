@@ -15,10 +15,10 @@ VPATH = srcs
 
 DIRS = $(ODIR)
 
-BRIGHT_GREEN = $(shell echo -e "\033[92m")
-GREEN = $(shell echo -e "\033[32m")
-RESET = $(shell echo -e "\033[0m")
-YELLOW = $(shell echo -e "\033[33m")
+BRIGHT_GREEN = $(shell printf "\033[92m")
+GREEN = $(shell printf "\033[32m")
+RESET = $(shell printf "\033[0m")
+YELLOW = $(shell printf "\033[33m")
 
 all: $(NAME)
 
