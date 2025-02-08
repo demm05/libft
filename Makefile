@@ -9,7 +9,7 @@ CFLAGS				+=	-I$(PRINTF_DIR)/include
 LIB					+=	$(PRINTF)
 
 LIBFT_DIR			=	$(LIB_DIR)/libft
-LIBFT_FILE			=	printf.a
+LIBFT_FILE			=	libft.a
 LIBFT				=	$(LIBFT_DIR)/$(LIBFT_FILE)
 CFLAGS				+=	-I$(LIBFT_DIR)/include
 LIB					+=	$(LIBFT)
