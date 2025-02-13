@@ -12,104 +12,111 @@
 
 #include "gnl.h"
 
-char	*ft_strchr(const char *s, int c)
+int	get_line_len(t_list *lst)
 {
-	while ((char)c != *s && *s)
-		s++;
-	if ((char)c == *s)
-		return ((char *)s);
-	return (0);
-}
-
-void	append_list(t_list **lst, char *content, int len, int is_nl)
-{
-	t_list	*new;
-	t_list	*cur;
-
-	if (!lst)
-		return ;
-	new = malloc(sizeof(t_list));
-	if (!new)
-		return ;
-	new->content = content;
-	new->c_len = len;
-	new->next = NULL;
-	new->is_nl = is_nl;
-	if (!*lst)
-	{
-		*lst = new;
-		return ;
-	}
-	cur = *lst;
-	while (cur->next)
-		cur = cur->next;
-	cur->next = new;
-}
-
-void	join_nodes(t_list *lst, char *dest)
-{
-	int	i;
-	int	j;
-
-	j = 0;
-	while (lst)
-	{
-		i = 0;
-		while (i < lst->c_len)
-		{
-			dest[j++] = lst->content[i];
-			if (lst->is_nl && lst->content[i] == '\n')
-			{
-				dest[j] = '\0';
-				return ;
-			}
-			i++;
-		}
-		lst = lst->next;
-	}
-	dest[j] = '\0';
-}
-
-int	is_there_nl(t_list *lst)
-{
+	int	len;
 	int	i;
 
-	while (lst)
-	{
-		i = 0;
-		while (lst->content[i])
-		{
-			if (lst->content[i++] == '\n')
-			{
-				lst->is_nl = 1;
-				return (1);
-			}
-		}
-		lst = lst->next;
-	}
-	return (0);
-}
-
-void	clean_node_with_nl(t_list *current, t_list **lst)
-{
-	int		i;
-	int		j;
-
+	len = 0;
 	i = 0;
-	while (current->content[i++] != '\n')
-		continue ;
-	if (i == current->c_len)
+	while (lst && !lst->is_nl)
+	{
+		len += lst->c_len;
+		lst = lst->next;
+	}
+	if (lst && lst->is_nl)
+	{
+		while (lst->content[i] && lst->content[i] != '\n')
+		{
+			i++;
+			len++;
+		}
+		len++;
+	}
+	return (len);
+}
+
+void	clean_list(t_list **lst)
+{
+	t_list	*current;
+	t_list	*next;
+
+	if (!lst || !*lst)
+		return ;
+	current = *lst;
+	while (current->next)
+	{
+		next = current->next;
+		free(current->content);
+		free(current);
+		current = next;
+	}
+	if (current->is_nl)
+		clean_node_with_nl(current, lst);
+	else
 	{
 		free(current->content);
 		free(current);
 		*lst = NULL;
-		return ;
 	}
-	j = 0;
-	while (i < current->c_len)
-		current->content[j++] = current->content[i++];
-	current->content[j] = '\0';
-	current->c_len = j;
-	current->is_nl = 0;
-	*lst = current;
+}
+
+char	*get_line(t_list *lst)
+{
+	char	*line;
+	int		line_len;
+
+	line_len = get_line_len(lst);
+	line = malloc(sizeof(char) * (line_len + 1));
+	if (!line)
+		return (NULL);
+	join_nodes(lst, line);
+	return (line);
+}
+
+int	create_list(int fd, t_list **lst)
+{
+	char	*buffer;
+	int		bytes_read;
+
+	if (is_there_nl(*lst))
+		return (0);
+	while (1)
+	{
+		buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+		if (!buffer)
+			return (0);
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_read <= 0)
+		{
+			free(buffer);
+			return (bytes_read);
+		}
+		buffer[bytes_read] = 0;
+		if (ft_strchr(buffer, '\n'))
+		{
+			append_list(lst, buffer, bytes_read, 1);
+			return (0);
+		}
+		append_list(lst, buffer, bytes_read, 0);
+	}
+}
+
+char	*get_next_line(int fd)
+{
+	static t_list	*lsts[FOPEN_MAX];
+	char			*line;
+
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= FOPEN_MAX)
+		return (NULL);
+	if (create_list(fd, &lsts[fd]) == -1)
+	{
+		clean_list(&lsts[fd]);
+		return (NULL);
+	}
+	if (!lsts[fd])
+		return (NULL);
+	line = get_line(lsts[fd]);
+	clean_list(&lsts[fd]);
+	return (line);
 }
