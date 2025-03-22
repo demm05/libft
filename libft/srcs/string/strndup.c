@@ -21,7 +21,7 @@ char	*ft_strndup(const char *src, size_t size)
 	dest = malloc(sizeof(char) * (size + 1));
 	if (!dest)
 		return (NULL);
-	while (i < n)
+	while (i < size)
 	{
 		dest[i] = src[i];
 		i++;
