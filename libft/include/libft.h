@@ -6,7 +6,7 @@
 /*   By: dmelnyk <dmelnyk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:13:27 by dmelnyk           #+#    #+#             */
-/*   Updated: 2025/01/28 19:33:52 by dmelnyk          ###   ########.fr       */
+/*   Updated: 2025/03/22 17:43:26 by dmelnyk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <stdlib.h>
 
 // ------------------------------------CHAR-----------------------------------
+
+int		ft_isspace(int c);
 
 /**
  * @brief Tests whether a character is a letter of the alphabet.
@@ -323,6 +325,21 @@ char	**ft_split(char const *s, char c);
 char	*ft_strdup(const char *src);
 
 /**
+ * @brief Duplicates a string within size.
+ *
+ * This function allocates sufficient memory (with `malloc(3)`) 
+ * for a copy of the string pointed to by `s1`, copies the string into 
+ * the new memory, and returns a pointer to it.
+ *
+ * @param s1 The string to duplicate.
+ * @param size Characters to duplicate.
+ *
+ * @return A pointer to the newly allocated string, 
+ *			or NULL if insufficient memory was available.
+ * */
+char	*ft_strndup(const char *src, size_t size);
+
+/**
  * @brief Converts a string to an double.
  *
  * This function converts the initial portion of the string 
@@ -400,6 +417,9 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*));
  * @return A pointer to the allocated memory, or NULL if the allocation fails.
  * */
 void	*ft_calloc(size_t nmemb, size_t size);
+
+
+void	*ft_realloc(void *ptr, size_t new_size);
 
 /**
  * @brief Copies a block of memory, handling overlapping areas.

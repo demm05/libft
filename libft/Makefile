@@ -20,26 +20,26 @@ SRCS				:=	atoi.c itoa.c tolower.c toupper.c \
 
 OBJS := $(patsubst %.c,$(ODIR)/%.o,$(SRCS))
 
-BRIGHT_GREEN = $(shell printf "\033[92m")
-GREEN = $(shell printf "\033[32m")
-RESET = $(shell printf "\033[0m")
-YELLOW = $(shell printf "\033[33m")
+BRIGHT_GREEN = "92m"
+GREEN = "32m"
+YELLOW = "33m"
 
 all: $(NAME)
 
 $(ODIR):
-	@mkdir -p $@
+	@mkdir -p $(ODIR)
 
-welcome: $(ODIR)
-	@echo -n "$(YELLOW)Building libft: $(RESET)"
+$(NAME): $(ODIR)
+	@printf "\033[33mBuilding libft:\033[0m"
+	@$(MAKE) -s build_objects
+	@ar rcs $(NAME) $(OBJS)
+	@printf "\r\033[K\033[32mLibft was built\033[0m\n"
 
-$(ODIR)/%.o: %.c | welcome
-	@$(CC) $(CFLAGS) -c -o $@ $< && echo -n "$(BRIGHT_GREEN).$(RESET)"
+build_objects: $(OBJS)
 
-$(NAME): $(OBJS)
-	@echo
-	@ar rcs $@ $^ && echo "$(GREEN)libft created.$(RESET)"
-	@echo
+$(ODIR)/%.o: %.c
+	@printf "\r\033[$(YELLOW)$(CC) $(CFLAGS) -c -o $@ $<"
+	@$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
 	@rm -rf $(ODIR)
@@ -50,4 +50,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re bonus
-

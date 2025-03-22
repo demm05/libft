@@ -13,28 +13,26 @@ CFLAGS = -Wall -Wextra -Werror -I$(HDIR) -fvisibility=hidden
 
 VPATH = srcs
 
-DIRS = $(ODIR)
-
-BRIGHT_GREEN = $(shell printf "\033[92m")
-GREEN = $(shell printf "\033[32m")
-RESET = $(shell printf "\033[0m")
-YELLOW = $(shell printf "\033[33m")
+BRIGHT_GREEN = "92m"
+GREEN = "32m"
+YELLOW = "33m"
 
 all: $(NAME)
 
-welcome:
-	@echo -n "$(YELLOW)Building printf: $(RESET)"
+$(ODIR):
+	@mkdir -p $(ODIR)
 
-$(DIRS): |welcome
-	@mkdir -p $@
+$(NAME): $(ODIR)
+	@printf "\033[33mBuilding printf:\033[0m"
+	@$(MAKE) -s build_objects
+	@ar rcs $(NAME) $(OBJS)
+	@printf "\r\033[K\033[32mPrintf was built\033[0m\n"
 
-$(NAME): $(OBJS)
-	@echo
-	@ar rcs $@ $^ && echo "$(GREEN)printf created.$(RESET)"
-	@echo
+build_objects: $(OBJS)
 
-$(ODIR)/%.o: %.c | $(DIRS)
-	@$(CC) $(CFLAGS) -c -o $@ $< && echo -n "$(BRIGHT_GREEN).$(RESET)"
+$(ODIR)/%.o: %.c
+	@printf "\r\033[$(YELLOW)$(CC) $(CFLAGS) -c -o $@ $<"
+	@$(CC) $(CFLAGS) -c -o $@ $<
 
 bonus : all
 
