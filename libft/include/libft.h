@@ -303,12 +303,12 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
  * The array must end with a NULL pointer.
  *
  * @param s The string to be split.
- * @param c The delimiter character.
+ * @param s The delimiters character.
  *
  * @return The array of new strings resulting from the split, 
  *			or NULL if the allocation fails.
  * */
-char	**ft_split(char const *s, char c);
+char	**ft_split(char *str, char *charset);
 
 /**
  * @brief Duplicates a string.
@@ -417,7 +417,6 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*));
  * @return A pointer to the allocated memory, or NULL if the allocation fails.
  * */
 void	*ft_calloc(size_t nmemb, size_t size);
-
 
 void	*ft_realloc(void *ptr, size_t new_size);
 

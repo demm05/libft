@@ -10,106 +10,86 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
-static void	free_array(char	**s, size_t size)
+static inline int	count_words(char *str, char *charset)
 {
-	size_t	i;
+	int	i;
+	int	count;
 
 	i = 0;
-	while (i++ < size)
-		free(s[i]);
-	free(s);
-}
-
-static size_t	strs_in_str(char const *s, char c)
-{
-	size_t	strs;
-	int		is_new_str;
-
-	strs = 0;
-	is_new_str = 1;
-	while (*s)
+	count = 0;
+	while (str[i])
 	{
-		if (*s != c && is_new_str)
-		{
-			strs++;
-			is_new_str = 0;
-		}
-		else if (*s == c && !is_new_str)
-			is_new_str = 1;
-		s++;
+		while (str[i] && ft_strchr(charset, str[i]))
+			i++;
+		if (str[i])
+			count++;
+		while (str[i] && !ft_strchr(charset, str[i]))
+			i++;
 	}
-	return (strs);
+	return (count);
 }
 
-static size_t	get_len_of_word(char const *str, char c)
+static inline int	free_array(char **arr, int count)
 {
-	const char	*anchor;
-
-	anchor = str;
-	while (*str && *str != c)
-		str++;
-	return (str - anchor);
-}
-
-static int	split_it(char const *s, char **s2, char c, size_t size)
-{
-	size_t	i;
-	size_t	len_of_word;
+	int	i;
 
 	i = 0;
-	while (i < size)
+	while (i < count)
+		free(arr[i++]);
+	free(arr);
+	return (0);
+}
+
+static inline char	*get_word(char *str, char *charset, int *ptr_i)
+{
+	int		i;
+	char	*word;
+	int		len;
+
+	len = 0;
+	while (str[len] && !ft_strchr(charset, str[len]))
+		len++;
+	word = malloc(sizeof(char) * len + 1);
+	if (!word)
+		return (0);
+	i = 0;
+	while (i < len)
 	{
-		while (*s == c)
-			s++;
-		len_of_word = get_len_of_word(s, c);
-		if (len_of_word == 0)
-			break ;
-		*s2 = ft_substr(s, 0, len_of_word);
-		if (!*s2)
-		{
-			free_array(s2, size);
-			return (1);
-		}
-		s += len_of_word;
-		s2++;
+		word[i] = str[i];
 		i++;
 	}
-	*s2 = 0;
-	return (1);
+	word[i] = 0;
+	*ptr_i += i;
+	return (word);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char *str, char *charset)
 {
-	char	**res;
-	size_t	substrs;
+	char	**arr;
+	int		i;
+	int		j;
 
-	if (!s)
-		return (0);
-	substrs = strs_in_str(s, c);
-	res = malloc((substrs + 1) * sizeof(char *));
-	if (!res)
-		return (0);
-	if (!split_it(s, res, c, substrs))
-		return (0);
-	return (res);
+	arr = (char **)malloc(sizeof(char *) * (count_words(str, charset) + 1));
+	if (arr == NULL)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		while (str[i] && ft_strchr(charset, str[i]))
+			i++;
+		if (str[i])
+		{
+			arr[j] = get_word(str + i, charset, &i);
+			if (!arr[j++])
+			{
+				free_array(arr, j - 1);
+				return (NULL);
+			}
+		}
+	}
+	arr[j] = 0;
+	return (arr);
 }
-
-// #include <stdio.h>
-// int main(void)
-// {
-// 	char	**res;
-// 
-// 	res = ft_split("asdf asdf asdzf   z", 'z'); 
-// 	if (!res)
-// 		return (1);
-// 	while (*res)
-// 	{
-// 		printf("%s\n", *res);
-// 		free(*res);
-// 		res++;
-// 	}
-// 	free(res);
-// 	return (0);
-// }
