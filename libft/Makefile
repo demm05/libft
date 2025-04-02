@@ -15,7 +15,7 @@ SRCS				:=	atoi.c itoa.c tolower.c toupper.c \
 		putnbr_fd.c putstr_fd.c isalnum.c isdigit.c strchr.c striteri.c \
 		strlcpy.c strncmp.c strtrim.c isalpha.c isprint.c strcmp.c strjoin.c \
 		strlen.c  strnstr.c substr.c isascii.c split.c strdup.c strlcat.c strmapi.c \
-		strrchr.c atod.c isspace.c strndup.c realloc.c
+		strrchr.c atod.c isspace.c strndup.c realloc.c atol.c
 
 
 OBJS := $(patsubst %.c,$(ODIR)/%.o,$(SRCS))
