@@ -363,6 +363,8 @@ double	ft_atod(const char *s);
  * */
 int		ft_atoi(const char *nptr);
 
+long	ft_atol(const char *str);
+
 /**
  * @brief Converts an integer to a string.
  *
