@@ -13,16 +13,6 @@
 #include "ft_printf.h"
 #include <unistd.h>
 
-size_t	ft_strlen(const char *str)
-{
-	const char	*anchor;
-
-	anchor = str;
-	while (*str)
-		str++;
-	return (str - anchor);
-}
-
 int	_pf_putstr(char *s, int fd)
 {
 	if (!s)
