@@ -564,4 +564,8 @@ void	ft_putnbr_fd(int num, int fd);
  * */
 char	*get_next_line(int fd);
 // ------------------------------------FILES-----------------------------------
+//
+int		ft_printf(const char *format, ...);
+int		ft_fprintf(int fd, const char *format, ...);
+
 #endif

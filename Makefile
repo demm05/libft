@@ -1,33 +1,54 @@
-LIB_DIR				=	libft
+HDIR				=	include
+SDIR				=	srcs
+ODIR				=	objs
 
-MAKE_LIB			=	@make --no-print-directory -C
+NAME 				=	libft.a
+CC 					=	gcc
+CFLAGS 				=	-Wall -Wextra -Werror -Iinclude/private
 
-PRINTF_DIR			=	$(LIB_DIR)/printf
-PRINTF_FILE			=	printf.a 	
-PRINTF				=	$(PRINTF_DIR)/$(PRINTF_FILE)
-CFLAGS				+=	-I$(PRINTF_DIR)/include
-LIB					+=	$(PRINTF)
+VPATH				=	$(SDIR):$(SDIR)/conversion:$(SDIR)/list:$(SDIR)/memory:$(SDIR)/output:$(SDIR)/string:$(SDIR)/printf
 
-LIBFT_DIR			=	$(LIB_DIR)/libft
-LIBFT_FILE			=	libft.a
-LIBFT				=	$(LIBFT_DIR)/$(LIBFT_FILE)
-CFLAGS				+=	-I$(LIBFT_DIR)/include
-LIB					+=	$(LIBFT)
+SRCS				:=	atoi.c itoa.c tolower.c toupper.c \
+		lstadd_back.c lstclear.c lstiter.c lstmap.c lstsize.c lstadd_front.c \
+		lstdelone.c lstlast.c lstnew.c bzero.c calloc.c memchr.c memcmp.c  \
+		memcpy.c memmove.c memset.c gnl.c gnl_utils.c putchar_fd.c putendl_fd.c \
+		putnbr_fd.c putstr_fd.c isalnum.c isdigit.c strchr.c striteri.c \
+		strlcpy.c strncmp.c strtrim.c isalpha.c isprint.c strcmp.c strjoin.c \
+		strlen.c  strnstr.c substr.c isascii.c split.c strdup.c strlcat.c strmapi.c \
+		strrchr.c atod.c isspace.c strndup.c realloc.c atol.c \
+		ft_parsers.c ft_printf_utils.c parse_specifier.c pf_hex.c pf_pointer.c pf_unsigned.c \
+		ft_printf.c libft.c pf_char.c pf_integer.c pf_string.c
 
-$(PRINTF):
-	$(MAKE_LIB) $(PRINTF_DIR)
 
-$(LIBFT):
-	$(MAKE_LIB) $(LIBFT_DIR)
+OBJS := $(patsubst %.c,$(ODIR)/%.o,$(SRCS))
 
-lib_clean:
-	$(MAKE_LIB) $(PRINTF_DIR) clean
-	$(MAKE_LIB) $(LIBFT_DIR) clean
+BRIGHT_GREEN = "92m"
+GREEN = "32m"
+YELLOW = "33m"
 
-lib_fclean:
-	$(MAKE_LIB) $(PRINTF_DIR) fclean
-	$(MAKE_LIB) $(LIBFT_DIR) fclean
+all: $(NAME)
 
-lib_re:
-	$(MAKE_LIB) $(PRINTF_DIR) re
-	$(MAKE_LIB) $(LIBFT_DIR) re
+$(ODIR):
+	@mkdir -p $(ODIR)
+
+$(NAME): $(ODIR)
+	@printf "\033[33mBuilding libft:\033[0m"
+	@$(MAKE) -s build_objects
+	@ar rcs $(NAME) $(OBJS)
+	@printf "\r\033[K\033[32mLibft was built\033[0m\n"
+
+build_objects: $(OBJS)
+
+$(ODIR)/%.o: %.c
+	@printf "\r\033[$(YELLOW)$(CC) $(CFLAGS) -c -o $@ $<"
+	@$(CC) $(CFLAGS) -c -o $@ $<
+
+clean:
+	@rm -rf $(ODIR)
+
+fclean: clean
+	@rm -f $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re bonus
