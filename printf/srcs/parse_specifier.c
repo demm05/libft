@@ -49,16 +49,16 @@ void	do_width(char *buffer, t_format_info *t_info, t_spec_info s_info)
 	else
 		pad = ' ';
 	if (s_info.flags.minus)
-		_pf_putstr(buffer, 1);
+		_pf_putstr(buffer, s_info.fd);
 	i = 0;
 	len = t_info->len;
 	while (i++ < (s_info.width - len))
 	{
-		_putchar(pad);
+		_putchar(pad, s_info.fd);
 		t_info->len++;
 	}
 	if (!s_info.flags.minus)
-		_pf_putstr(buffer, 1);
+		_pf_putstr(buffer, s_info.fd);
 }
 
 char	*get_buffer(const char *format, va_list val,
@@ -86,7 +86,7 @@ char	*get_buffer(const char *format, va_list val,
 	return (buffer);
 }
 
-void	pf_initialize_var(t_spec_info *s_info, t_format_info *t_info)
+void	pf_initialize_var(t_spec_info *s_info, t_format_info *t_info, int fd)
 {
 	t_info->is_valid = 0;
 	s_info->flags.plus = 0;
@@ -99,16 +99,18 @@ void	pf_initialize_var(t_spec_info *s_info, t_format_info *t_info)
 	s_info->is_width = 0;
 	s_info->width = 0;
 	s_info->is_char = 0;
+	s_info->fd = fd;
 }
 
-void	parse_specifier(const char *format, t_format_info *t_info, va_list val)
+void	parse_specifier(const char *format, t_format_info *t_info,
+			va_list val, int fd)
 {
 	t_spec_info			s_info;
 	int					i;
 	char				*buffer;
 
 	i = 0;
-	pf_initialize_var(&s_info, t_info);
+	pf_initialize_var(&s_info, t_info, fd);
 	if (parse_flags(format, &s_info, &i) == -1)
 		return ;
 	parse_width(format, &s_info, &i);

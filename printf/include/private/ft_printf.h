@@ -39,6 +39,7 @@ typedef struct s_spec_info
 	int		is_precision;
 	int		is_width;
 	int		is_char;
+	int		fd;
 }	t_spec_info;
 
 typedef char	*(*t_spec_formatter)(va_list, t_spec_info *);
@@ -53,12 +54,13 @@ char	*pf_lhex(va_list val, t_spec_info *s_info);
 char	*pf_uhex(va_list val, t_spec_info *s_info);
 char	*pf_pointer(va_list val, t_spec_info *s_info);
 
-void	parse_specifier(const char *format, t_format_info *t_info, va_list val);
+void	parse_specifier(const char *format, t_format_info *t_info,
+			va_list val, int fd);
 int		parse_flags(const char *format, t_spec_info *s_info, int *i);
 void	parse_width(const char *format, t_spec_info *s_info, int *i);
 void	parse_precision(const char *format, t_spec_info *s_info, int *i);
 int		check_flag(char c, t_flags *flags);
-int		_putchar(char c);
+int		_putchar(char c, int fd);
 int		_pf_putstr(char *s, int fd);
 int		pf_atoi(const char *nptr);
 size_t	ft_strlen(const char *str);

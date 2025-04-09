@@ -13,9 +13,9 @@
 #include "ft_printf.h"
 #include <unistd.h>
 
-int	_putchar(char c)
+int	_putchar(char c, int fd)
 {
-	return (write(1, &c, 1));
+	return (write(fd, &c, 1));
 }
 
 char	*pf_char(va_list val, t_spec_info *s_info)
@@ -30,9 +30,9 @@ char	*pf_char(va_list val, t_spec_info *s_info)
 	if (s_info->width && !s_info->flags.minus)
 	{
 		while (i++ < s_info->width)
-			_putchar(' ');
+			_putchar(' ', s_info->fd);
 	}
-	_putchar(c);
+	_putchar(c, s_info->fd);
 	return (ft_strdup(""));
 }
 

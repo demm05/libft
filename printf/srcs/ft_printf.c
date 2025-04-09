@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int	parse_format(const char *format, va_list val)
+int	parse_format(const char *format, va_list val, int fd)
 {
 	int				len;
 	int				i;
@@ -24,7 +24,7 @@ int	parse_format(const char *format, va_list val)
 	{
 		if (format[i] == '%')
 		{
-			parse_specifier(format + i + 1, &info, val);
+			parse_specifier(format + i + 1, &info, val, fd);
 			if (info.is_valid && info.len >= 0)
 			{
 				len += info.len;
@@ -32,7 +32,7 @@ int	parse_format(const char *format, va_list val)
 				continue ;
 			}
 		}
-		len += _putchar(format[i++]);
+		len += _putchar(format[i++], fd);
 	}
 	return (len);
 }
@@ -45,7 +45,21 @@ int	__attribute__((visibility("default")))	ft_printf(const char *format, ...)
 	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
 		return (-1);
 	va_start(args, format);
-	len = parse_format(format, args);
+	len = parse_format(format, args, 0);
+	va_end(args);
+	return (len);
+}
+
+int	__attribute__((visibility("default")))	ft_fprintf(int fd,
+				const char *format, ...)
+{
+	va_list			args;
+	int				len;
+
+	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
+		return (-1);
+	va_start(args, format);
+	len = parse_format(format, args, fd);
 	va_end(args);
 	return (len);
 }
