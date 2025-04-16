@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 void	*ft_realloc(void *ptr, size_t new_size)
 {
@@ -22,6 +23,7 @@ void	*ft_realloc(void *ptr, size_t new_size)
 	cur_size = sizeof(ptr);
 	if (new_size <= cur_size)
 		return (ptr);
+	printf("size: %ld\n", cur_size);
 	new = malloc(new_size);
 	ft_memcpy(new, ptr, cur_size);
 	free(ptr);

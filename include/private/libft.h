@@ -47,6 +47,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 // -----------------------------------STRING-----------------------------------
 // -----------------------------------MEMORY-----------------------------------
+void	*ft_realloc(void *ptr, size_t new_size);;
 void	*ft_calloc(size_t nmemb, size_t size);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 void	*ft_memset(void *s, int c, size_t n);
@@ -78,5 +79,23 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 // ------------------------------------LIST------------------------------------
+
+typedef struct s_vector
+{
+	size_t	capacity;
+	size_t	size;
+	size_t	elem_size;
+	void	*data;
+}	t_vector;
+
+t_vector	*vec_create(size_t element_type, size_t nmemb);
+void		vec_grow(t_vector *vec, size_t nmemb);
+void		*vec_get(t_vector *vec, size_t index);
+void		vec_insert(t_vector *vec, size_t index, void *data);
+void		vec_clear(t_vector *vec, void (*del)(void *));
+void		vec_free(t_vector *vec, void (*del)(void *));
+void		vec_set(t_vector *vec, size_t index, void *data);
+void		vec_remove(t_vector *vec, size_t index);
+void		vec_push(t_vector *vec, void *data);
 
 #endif

@@ -568,4 +568,25 @@ char	*get_next_line(int fd);
 int		ft_printf(const char *format, ...);
 int		ft_fprintf(int fd, const char *format, ...);
 
+// VECTOR
+
+typedef struct s_vector
+{
+	size_t	capacity;
+	size_t	size;
+	size_t	elem_size;
+	void	*data;
+}	t_vector;
+
+t_vector	*vec_create(size_t element_type, size_t nmemb);
+void		vec_grow(t_vector *vec, size_t nmemb);
+void		*vec_get(t_vector *vec, size_t index);
+void		vec_insert(t_vector *vec, size_t index, void *data);
+void		vec_clear(t_vector *vec, void (*del)(void *));
+void		vec_free(t_vector *vec, void (*del)(void *));
+void		vec_set(t_vector *vec, size_t index, void *data);
+void		vec_remove(t_vector *vec, size_t index);
+void		vec_push(t_vector *vec, void *data);
+// VECTOR
+
 #endif
