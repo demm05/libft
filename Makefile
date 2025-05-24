@@ -4,7 +4,7 @@ ODIR				=	objs
 
 NAME 				=	libft.a
 CC 					=	gcc
-CFLAGS 				=	-Wall -Wextra -Werror -Iinclude/private
+CFLAGS 				=	-Wall -Wextra -Werror -I$(HDIR) -I.
 
 VPATH				=	$(SDIR):$(SDIR)/conversion:$(SDIR)/list:$(SDIR)/memory:$(SDIR)/output:$(SDIR)/string:$(SDIR)/printf
 
