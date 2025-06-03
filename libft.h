@@ -15,6 +15,10 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdbool.h>
+
+# define UNDEFINE -1
+# define SUCCESS 0
 
 // ------------------------------------CHAR-----------------------------------
 
@@ -584,5 +588,20 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 // ------------------------------------LIST------------------------------------
+
+typedef struct s_vector_list	t_vector_list;
+typedef struct s_vector			t_vec;
+
+typedef struct s_vector
+{
+	t_vector_list	*v_list;
+	void			(*clear)(t_vec*v); // clear vector items
+	void			(*free)(t_vec*v); // free allocated resources by vector
+	int				(*grow)(t_vec*v, size_t new_size);
+	int				(*push_back)(t_vec*v, void *item);
+}	t_vector;
+
+int		vector_init(t_vec *v, void (*del)(void *), size_t capacity);
+t_vec	*vector_create(void (*del)(void *), size_t capacity);
 
 #endif

@@ -4,9 +4,9 @@ ODIR				=	objs
 
 NAME 				=	libft.a
 CC 					=	gcc
-CFLAGS 				=	-Wall -Wextra -Werror -I$(HDIR) -I.
+CFLAGS 				=	-Wall -Wextra -Werror -I$(HDIR) -I. -g
 
-VPATH				=	$(SDIR):$(SDIR)/conversion:$(SDIR)/list:$(SDIR)/memory:$(SDIR)/output:$(SDIR)/string:$(SDIR)/printf
+VPATH				=	$(SDIR):$(SDIR)/conversion:$(SDIR)/list:$(SDIR)/memory:$(SDIR)/output:$(SDIR)/string:$(SDIR)/printf:$(SDIR)/vector
 
 SRCS				:=	atoi.c itoa.c tolower.c toupper.c \
 		lstadd_back.c lstclear.c lstiter.c lstmap.c lstsize.c lstadd_front.c \
@@ -17,7 +17,8 @@ SRCS				:=	atoi.c itoa.c tolower.c toupper.c \
 		strlen.c  strnstr.c substr.c isascii.c split.c strdup.c strlcat.c strmapi.c \
 		strrchr.c atod.c isspace.c strndup.c realloc.c atol.c \
 		ft_parsers.c ft_printf_utils.c parse_specifier.c pf_hex.c pf_pointer.c pf_unsigned.c \
-		ft_printf.c libft.c pf_char.c pf_integer.c pf_string.c
+		ft_printf.c libft.c pf_char.c pf_integer.c pf_string.c \
+		vector_list.c vector_mem.c vector_operations.c
 
 
 OBJS := $(patsubst %.c,$(ODIR)/%.o,$(SRCS))
