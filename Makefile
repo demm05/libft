@@ -18,7 +18,7 @@ SRCS				:=	atoi.c itoa.c tolower.c toupper.c \
 		strrchr.c atod.c isspace.c strndup.c realloc.c atol.c \
 		ft_parsers.c ft_printf_utils.c parse_specifier.c pf_hex.c pf_pointer.c pf_unsigned.c \
 		ft_printf.c libft.c pf_char.c pf_integer.c pf_string.c \
-		vector_list.c vector_mem.c vector_operations.c
+		vector_list.c vector_mem.c vector_op.c vector_put.c vector_init.c vector_utils.c
 
 
 OBJS := $(patsubst %.c,$(ODIR)/%.o,$(SRCS))

@@ -599,6 +599,11 @@ typedef struct s_vector
 	void			(*free)(t_vec*v); // free allocated resources by vector
 	int				(*grow)(t_vec*v, size_t new_size);
 	int				(*push_back)(t_vec*v, void *item);
+	int				(*push_front)(t_vec *v, void *item);
+	int				(*get)(t_vec *v, size_t index, void **dest);
+	int				(*insert)(t_vec *v, size_t index, void *item);
+	size_t			(*size)(t_vec * v);
+	void			*(*dget)(t_vec *v, size_t index);
 }	t_vector;
 
 int		vector_init(t_vec *v, void (*del)(void *), size_t capacity);

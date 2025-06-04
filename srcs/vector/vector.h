@@ -19,5 +19,16 @@ void			vec_list_free(t_vector_list *v);
 int				vec_list_grow(t_vector_list *v, size_t members);
 
 int				vec_push_back(t_vector *v, void *item);
+int				vec_push_front(t_vector *v, void *item);
+int				vec_get(t_vector *v, size_t index, void **dest);
+size_t			vec_size(t_vector *v);
+int				vec_insert(t_vector *v, size_t index, void *item);
+void			vec_set_defaults(t_vector *v);
+void			*vec_direct_get(t_vector *v, size_t index);
+void			vec_memmove(size_t dest, size_t src, size_t size, t_vector_list *v);
+
+void	vector_clear(t_vector *v);
+void	vector_free(t_vector *v);
+int		vector_grow(t_vector *v, size_t new_capacity);
 
 #endif

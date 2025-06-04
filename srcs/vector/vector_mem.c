@@ -1,23 +1,5 @@
 #include "vector.h"
 
-void	vector_clear(t_vector *v);
-void	vector_free(t_vector *v);
-int		vector_grow(t_vector *v, size_t new_capacity);
-
-int	vector_init(t_vector *v, void (*del)(void *), size_t capacity)
-{
-	if (!v)
-		return (UNDEFINE);
-	v->v_list = vec_list_init(capacity, sizeof(void *), del);
-	if (!v->v_list)
-		return (UNDEFINE);
-	v->clear = vector_clear;
-	v->free = vector_free;
-	v->grow = vector_grow;
-	v->push_back = vec_push_back;
-	return (SUCCESS);
-}
-
 t_vector	*vector_create(void (*del)(void *), size_t capacity)
 {
 	t_vector	*v;
