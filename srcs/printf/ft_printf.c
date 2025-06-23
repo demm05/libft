@@ -64,6 +64,17 @@ int	__attribute__((visibility("default")))	ft_fprintf(int fd,
 	return (len);
 }
 
+int	__attribute__((visibility("default")))	ft_vfprintf(int fd,
+				const char *format, va_list args)
+{
+	int				len;
+
+	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
+		return (-1);
+	len = parse_format(format, args, fd);
+	return (len);
+}
+
 // #include <unistd.h>
 // #include <stdio.h>
 // int	main(void)

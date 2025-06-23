@@ -20,7 +20,6 @@ SRCS				:=	atoi.c itoa.c tolower.c toupper.c \
 		ft_printf.c libft.c pf_char.c pf_integer.c pf_string.c \
 		vector_list.c vector_mem.c vector_op.c vector_put.c vector_init.c vector_utils.c
 
-
 OBJS := $(patsubst %.c,$(ODIR)/%.o,$(SRCS))
 
 BRIGHT_GREEN = "92m"

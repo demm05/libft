@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vector_list.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmelnyk <dmelnyk@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/23 11:17:04 by dmelnyk           #+#    #+#             */
+/*   Updated: 2025/06/23 11:17:05 by dmelnyk          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vector.h"
 
-t_vector_list	*vec_list_init(size_t capacity, size_t item_size,\
+t_vector_list	*vec_list_init(size_t capacity, size_t item_size, \
 					void (*del)(void *))
 {
 	t_vector_list	*v;

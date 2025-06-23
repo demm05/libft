@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vector_init.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmelnyk <dmelnyk@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/23 11:17:00 by dmelnyk           #+#    #+#             */
+/*   Updated: 2025/06/23 11:17:01 by dmelnyk          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vector.h"
 
 void	vec_set_defaults(t_vector *v)
@@ -25,4 +37,3 @@ int	vector_init(t_vector *v, void (*del)(void *), size_t capacity)
 	vec_set_defaults(v);
 	return (SUCCESS);
 }
-
