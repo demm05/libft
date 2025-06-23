@@ -573,6 +573,7 @@ char	*get_next_line(int fd);
 int		ft_printf(const char *format, ...);
 int		ft_fprintf(int fd, const char *format, ...);
 int		ft_vfprintf(int fd, const char *format, va_list args);
+
 // ------------------------------------LIST------------------------------------
 typedef struct s_list
 {
